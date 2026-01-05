@@ -28,6 +28,8 @@
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 Anonymouz. All rights reserved.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>JamWiFi needs Wi-Fi scanning access; macOS requires Location Services permission to list nearby networks.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
