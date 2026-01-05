@@ -59,10 +59,10 @@ class JWAppDelegate: NSObject, NSApplicationDelegate {
 		if UserDefaults.standard.dictionary(forKey: "USER_SCAN_OPTIONS") == nil {
 			UserDefaults.standard.set(["SCAN_MERGE":kCFBooleanFalse], forKey: "USER_SCAN_OPTIONS")
 		}
-	
-		
-		if let handle = dlopen(nil, RTLD_LAZY) {
-		//if let handle = dlopen("/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Apple80211", RTLD_LAZY) {
+
+		let apple80211Path = "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Apple80211"
+		let handle = dlopen(apple80211Path, RTLD_LAZY | RTLD_GLOBAL) ?? dlopen(nil, RTLD_LAZY)
+		if let handle = handle {
 			if let open = dlsym(handle, "Apple80211Open") {
 				_open = unsafeBitCast(open, to: openFunc.self)
 			} else { ErrorInfo(errorCode: 6) }
@@ -81,7 +81,6 @@ class JWAppDelegate: NSObject, NSApplicationDelegate {
 			if let errStr = dlsym(handle, "Apple80211ErrToStr") {
 				_errStr = unsafeBitCast(errStr, to: errStrFunc.self)
 			} else { ErrorInfo(errorCode: 11) }
-			dlclose(handle)
 		} else { ErrorInfo(errorCode: 5) }
 		
 		window.isMovableByWindowBackground = true
@@ -158,4 +157,3 @@ class JWAppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 }
-
