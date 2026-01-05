@@ -15,7 +15,7 @@
 - Added Support for MacOS Mojave/Catalina
 - Added Dark Mode Support
 
-
+ 
 [Download Latest Pre-Compiled](https://github.com/anonymouz4/JamWiFi/releases/latest)
 
 ---
